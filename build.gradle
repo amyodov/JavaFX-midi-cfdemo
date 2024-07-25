@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'com.amyodov.midi.cfdemo'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+//    implementation group: 'org.openjfx', name: 'javafx-controls', version: '21'
+//    implementation group: 'org.openjfx', name: 'javafx-fxml', version: '21'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+//application {
+//    mainClass = 'com.amyodov.midi.cfdemo.Main'
+//}
+
+javafx {
+//    version = "22.0.1"
+    version = JavaVersion.VERSION_21
+    modules = ['javafx.controls', 'javafx.fxml']
+//    modules = ['javafx.base', 'javafx.graphics', 'javafx.controls', 'javafx.fxml' ]
+}
+
+test {
+    useJUnitPlatform()
+}
+
+mainClassName = 'com.amyodov.midi.cfdemo.MainApp'
