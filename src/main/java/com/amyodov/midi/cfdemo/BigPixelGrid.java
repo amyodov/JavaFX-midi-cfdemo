@@ -10,7 +10,7 @@ import javafx.util.Duration;
 public class BigPixelGrid {
     public static final double BIGPIXEL_SIZE = 64.0; // Size of each bigpixel
     private static final double NOTE_SPEED = 10.0; // Speed of the ball, in bigpixel diameters
-    private static final double NOTE_DIAMETER = 2.0; // Radius of the ball, in bigpixel diameters
+    private static final double NOTE_DIAMETER = 4.0; // Radius of the ball, in bigpixel diameters
 
     private static final double DEFAULT_CIRCLE_SIZE = 8.0; // Default size when unlit
 
@@ -124,11 +124,14 @@ public class BigPixelGrid {
         final Circle middleCircle = circleGrid[middleY][middleX];
         final Color middleColor = (Color) middleCircle.getFill();
 
+        final double lightenOffset = (255 - MAX_COLOR_COMPONENT) / 255.0;
+
         final Circle ball = new Circle(NOTE_DIAMETER * BIGPIXEL_SIZE / 2.0);
+        // The note color will be the lighter version of middle pixel color
         ball.setFill(new Color(
-                middleColor.getRed(),
-                middleColor.getGreen(),
-                middleColor.getBlue(),
+                Math.min(middleColor.getRed() + lightenOffset, 1.0),
+                Math.min(middleColor.getGreen() + lightenOffset, 1.0),
+                Math.min(middleColor.getBlue() + lightenOffset, 1.0),
                 0.75
         ));
         pane.getChildren().add(ball);
